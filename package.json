@@ -1,0 +1,42 @@
+{
+  "name": "echo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Echo news app. Your voice, amplified.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabioop/echo.git"
+  },
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev --turbopack",
+    "lint:fix": "biome check ./src --write --unsafe && yarn lint:types",
+    "lint:types": "tsc --noEmit",
+    "lint": "biome check ./src && yarn lint:types",
+    "pre-commit": "lint-staged",
+    "prepare": "husky",
+    "start": "next start"
+  },
+  "lint-staged": {
+    "*.@(ts|tsx|js)": [
+      "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
+    ]
+  },
+  "dependencies": {
+    "next": "15.2.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
