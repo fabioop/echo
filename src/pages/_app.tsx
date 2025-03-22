@@ -2,8 +2,8 @@
  * Modules dependencies.
  */
 
-import { Layout } from "@/components/layout";
 import "@/styles/globals.css";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 import type { AppProps } from "next/app";
 
 /**
@@ -12,8 +12,8 @@ import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
-		<Layout>
+		<UserProvider>
 			<Component {...pageProps} />
-		</Layout>
+		</UserProvider>
 	);
 }
