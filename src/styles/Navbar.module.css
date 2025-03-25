@@ -1,0 +1,33 @@
+.navbar {
+	width: 100%;
+	padding: 1rem 0;
+	background-color: #fff;
+	border-bottom: 1px solid #eaeaea;
+}
+
+.navigation {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+.userInfo {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.userInfo p {
+	margin: 0;
+	font-weight: 500;
+}
+
+.userInfo img {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	object-fit: cover;
+}

@@ -2,22 +2,34 @@
  * Modules dependencies.
  */
 
-import type { UserContext } from "@auth0/nextjs-auth0/client";
-import Link from "next/link";
+import { useUser } from '@/hooks/use-user';
+import styles from '@/styles/navbar.module.css';
+import Link from 'next/link';
 
 /**
  * Export `Navbar` component.
  */
 
-export const Navbar = ({ user, isLoading }: Pick<UserContext, "user" | "isLoading">) => {
+export const Navbar = () => {
+	const { user, isLoading, isAdmin } = useUser();
+
 	return (
-		<header className="navbar">
-			<nav className="container navigation">
-				<Link href="/">home</Link>
+		<header className={styles.navbar}>
+			<nav className={styles.navigation}>
+				<Link href='/'>home</Link>
 
-				{user && !isLoading && <Link href="/api/auth/logout">logout</Link>}
+				{isAdmin && <Link href='/article/new'>Create Article</Link>}
 
-				{!user && !isLoading && <Link href="/api/auth/login">login</Link>}
+				{!user && !isLoading && <Link href='/api/auth/login'>login</Link>}
+
+				{user && !isLoading && (
+					<div className={styles.userInfo}>
+						<p>Welcome {user.name || 'User'}</p>
+						{user.picture && user.name && <img src={user.picture} alt={user.name} />}
+					</div>
+				)}
+
+				{user && !isLoading && <Link href='/api/auth/logout'>logout</Link>}
 			</nav>
 		</header>
 	);

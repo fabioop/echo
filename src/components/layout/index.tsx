@@ -2,11 +2,11 @@
  * Modules dependencies.
  */
 
-import type { UserContext } from "@auth0/nextjs-auth0/client";
-import { Geist, Geist_Mono } from "next/font/google";
-import type { ReactNode } from "react";
-import { Footer } from "./footer";
-import { Navbar } from "./navbar";
+import { useUser } from '@/hooks/use-user';
+import { Geist, Geist_Mono } from 'next/font/google';
+import type { ReactNode } from 'react';
+import { Footer } from './footer';
+import { Navbar } from './navbar';
 
 /**
  * Props type.
@@ -14,39 +14,43 @@ import { Navbar } from "./navbar";
 
 type Props = {
 	children: ReactNode;
-} & Pick<UserContext, "user" | "isLoading" | "error">;
+};
 
 /**
  * Geist fonts.
  */
 
 const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
+	variable: '--font-geist-sans',
+	subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
+	variable: '--font-geist-mono',
+	subsets: ['latin'],
 });
 
 /**
  * Export `Layout`.
  */
 
-export const Layout = ({ children, user, isLoading, error }: Props) => {
-	if (isLoading) return <div>Loading...</div>;
-	if (error) return <div>{error.message}</div>;
+export const Layout = ({ children }: Props) => {
+	const { user, isLoading, error } = useUser();
 
 	return (
 		<div className={`${geistSans.variable} ${geistMono.variable} font-sans`}>
-			<Navbar user={user} isLoading={isLoading} />
+			<Navbar />
 
-			<main className="container">
+			<main className='container'>
+				{isLoading && <div>Loading user...</div>}
+
+				{error && <div>{error.message}</div>}
+
 				{!isLoading && !user && <h2>Please login</h2>}
 
 				{!isLoading && user && children}
 			</main>
+
 			<Footer />
 		</div>
 	);
