@@ -1,6 +1,7 @@
 /**
  * Modules dependencies.
  */
+
 import { Loader } from 'lucide-react';
 import styles from './loading.module.css';
 

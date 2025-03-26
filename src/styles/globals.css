@@ -59,7 +59,7 @@ a:hover {
 	text-decoration: underline;
 }
 
-a[data-is-button]:hover {
+a[data-is-button="true"]:hover {
 	text-decoration: none;
 }
 
@@ -76,7 +76,7 @@ a[data-is-button]:hover {
 .container {
 	margin: 0 auto;
 	max-width: var(--container-max-width);
-	padding: 0 1rem;
+	padding: 0 var(--spacing-md);
 }
 
 .layout {

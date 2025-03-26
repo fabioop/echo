@@ -83,7 +83,7 @@ export const ArticlesList = ({ userNickname, title }: Props) => {
 	} = useArticlesList(userNickname);
 
 	return (
-		<section className={styles.section}>
+		<section>
 			<h2>{title}</h2>
 
 			<div className={styles.container}>

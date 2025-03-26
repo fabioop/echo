@@ -2,10 +2,10 @@
  * Modules dependencies.
  */
 
+import { Header } from '@/components/core/header';
 import { Image } from '@/components/core/image';
 import { Link } from '@/components/core/link';
 import type { Article } from '@/types/article';
-import { formatDate } from '@/utils/date';
 import styles from '../cards.module.css';
 
 /**
@@ -32,15 +32,12 @@ export const FeaturedCard = ({ article, isFirst }: Props) => {
 
 			<div className={styles.content}>
 				<div className={styles.header}>
-					{isFirst ? <h1>{title}</h1> : <h2>{title}</h2>}
-
-					<div className={styles.meta}>
-						<time dateTime={article.createdAt}>{formatDate(article.createdAt)}</time>
-						&#x2022;
-						<Link ariaLabel='View author profile' href={`/${authorNickname}`} label={`@${authorNickname}`} />
-					</div>
-
-					<span className={styles.category}>{category}</span>
+					<Header
+						title={title}
+						createdAt={article.createdAt}
+						authorNickname={article.authorNickname}
+						category={category}
+					/>
 				</div>
 
 				<p>{smallDescription}</p>

@@ -4,6 +4,7 @@
 
 import { Button } from '@/components/core/button';
 import { ErrorMessage } from '@/components/core/error';
+import { Header } from '@/components/core/header';
 import { Image } from '@/components/core/image';
 import { Link } from '@/components/core/link';
 import { Loading } from '@/components/core/loading';
@@ -13,6 +14,7 @@ import { useUser } from '@/hooks/use-user';
 import styles from '@/styles/article.module.css';
 import type { Article } from '@/types/article';
 import type { User } from '@/types/user';
+import { formatDate } from '@/utils/date';
 import { errorNotification, successNotification } from '@/utils/notifications';
 import { Pencil, Trash } from 'lucide-react';
 import { useRouter } from 'next/router';
@@ -95,33 +97,38 @@ export default function ArticlePage() {
 
 	return (
 		<>
-			<SEO title={article.title} description={article.content} canonical={`/${nickname}/${slug}`} />
+			<SEO title={article.title} description={article.smallDescription} canonical={`/${nickname}/${slug}`} />
 
 			<div>
 				<div className={styles.featuredImage}>
 					<Image src={article.imageUrl} alt={article.title} />
 				</div>
 
-				<div className={styles.actions}>
-					{isAuthorized && (
-						<>
-							<Link ariaLabel={`Edit article: ${article.title}`} href={`/article/edit/${slug}`} isButton isAction>
-								<Pencil size={16} />
-							</Link>
-
-							<Button ariaLabel={`Delete article ${article.title}`} type='button' onClick={handleDelete} isAction>
-								<Trash size={16} />
-							</Button>
-						</>
-					)}
-				</div>
-
 				<article className={styles.content}>
-					<h1>{article.title}</h1>
-					<div>{article.content}</div>
-					<Link ariaLabel={`View ${article.authorNickname}'s profile`} href={`/${article.authorNickname}`}>
-						{article.authorNickname}
-					</Link>
+					<div className={styles.actions}>
+						{isAuthorized && (
+							<>
+								<Link ariaLabel={`Edit article: ${article.title}`} href={`/article/edit/${slug}`} isButton isAction>
+									<Pencil size={16} />
+								</Link>
+
+								<Button ariaLabel={`Delete article ${article.title}`} type='button' onClick={handleDelete} isAction>
+									<Trash size={16} />
+								</Button>
+							</>
+						)}
+					</div>
+
+					<div>
+						<Header
+							title={article.title}
+							createdAt={article.createdAt}
+							authorNickname={article.authorNickname}
+							category={article.category}
+						/>
+
+						<div className={styles.body}>{article.content}</div>
+					</div>
 				</article>
 			</div>
 		</>

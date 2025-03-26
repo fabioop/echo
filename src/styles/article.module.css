@@ -1,7 +1,7 @@
 .container {
-	max-width: var(--container-max-width);
 	margin: 0 auto;
-	padding: 2rem 1rem;
+	max-width: var(--container-max-width);
+	padding: 2rem var(--spacing-md);
 }
 
 .title {
@@ -11,17 +11,22 @@
 }
 
 .content {
+	margin: var(--spacing-xl) auto;
 	max-width: 48rem;
-	margin: 0 auto;
+}
+
+.body {
+	margin-top: var(--spacing-xl);
 }
 
 .actions {
 	display: flex;
-	gap: 1rem;
+	gap: var(--spacing-md);
+	margin-bottom: var(--spacing-xl);
 }
 
 .featuredImage {
-	width: 100%;
 	aspect-ratio: 16 / 9;
 	position: relative;
+	width: 100%;
 }

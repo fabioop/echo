@@ -20,7 +20,7 @@
 
 .label {
 	display: block;
-	font-size: 1rem;
+	font-size: var(--spacing-md);
 	font-weight: 500;
 	color: var(--color-text);
 	margin-bottom: var(--spacing-sm);

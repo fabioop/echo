@@ -1,10 +1,9 @@
 .card {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 1rem;
+	gap: var(--spacing-md);
 }
 
-/* Featured card specific styles */
 .featuredCard:nth-child(2n) .image {
 	order: 1;
 }
@@ -17,12 +16,10 @@
 	position: relative;
 }
 
-/* Regular card image */
 .card .image {
 	aspect-ratio: 1;
 }
 
-/* Featured card image */
 .featuredCard .image {
 	aspect-ratio: 16 / 9;
 }
@@ -30,7 +27,7 @@
 .content {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: var(--spacing-md);
 	align-items: flex-start;
 }
 
@@ -38,33 +35,9 @@
 	padding: var(--spacing-md) 0;
 }
 
-.header {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-xs);
-	align-items: flex-start;
-}
-
-.category {
-	font-size: 0.875rem;
-	background-color: var(--color-secondary);
-	color: var(--color-text);
-	border-radius: var(--border-radius);
-	padding: var(--spacing-xs) var(--spacing-sm);
-}
-
-.meta {
-	display: flex;
-	align-items: center;
-	gap: var(--spacing-sm);
-	margin-bottom: var(--spacing-sm);
-	font-size: 0.875rem;
-	color: var(--color-text);
-}
-
 .actions {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 1rem;
+	gap: var(--spacing-md);
 	margin-top: var(--spacing-md);
 }

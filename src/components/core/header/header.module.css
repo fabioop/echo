@@ -1,0 +1,23 @@
+.header {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-xs);
+	align-items: flex-start;
+}
+
+.category {
+	font-size: 0.875rem;
+	background-color: var(--color-secondary);
+	color: var(--color-text);
+	border-radius: var(--border-radius);
+	padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.meta {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-sm);
+	margin-bottom: var(--spacing-sm);
+	font-size: 0.875rem;
+	color: var(--color-text);
+}

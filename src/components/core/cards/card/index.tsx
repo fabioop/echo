@@ -6,8 +6,8 @@ import { Button } from '@/components/core/button';
 import { Image } from '@/components/core/image';
 import { Link } from '@/components/core/link';
 import type { Article } from '@/types/article';
-import { formatDate } from '@/utils/date';
 import { Pencil, Trash } from 'lucide-react';
+import { Header } from '../../header';
 import styles from '../cards.module.css';
 
 /**
@@ -34,21 +34,14 @@ export const Card = ({ article, isAuthorized, handleDelete }: Props) => {
 			</div>
 
 			<div className={styles.content}>
-				<div className={styles.header}>
-					<h3>{title}</h3>
-
-					<div className={styles.meta}>
-						<time dateTime={article.createdAt}>{formatDate(article.createdAt)}</time>
-						&#x2022;
-						<Link
-							ariaLabel='View author profile'
-							href={`/${article.authorNickname}`}
-							label={`@${article.authorNickname}`}
-						/>
-					</div>
-
-					<span className={styles.category}>{category}</span>
-				</div>
+				<Header
+					title={title}
+					createdAt={article.createdAt}
+					authorNickname={article.authorNickname}
+					category={category}
+					isCard
+					isFeatured={false}
+				/>
 
 				<p>{smallDescription}</p>
 
