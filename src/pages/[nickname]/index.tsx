@@ -17,51 +17,51 @@ import { useEffect, useState } from 'react';
  */
 
 export default function UserProfile() {
-	const router = useRouter();
-	const { nickname } = router.query;
+  const router = useRouter();
+  const { nickname } = router.query;
 
-	const { getLocalUser } = useUser();
-	const [isLoading, setIsLoading] = useState(true);
+  const { getLocalUser } = useUser();
+  const [isLoading, setIsLoading] = useState(true);
 
-	const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
-	useEffect(() => {
-		(async () => {
-			try {
-				setIsLoading(true);
+  useEffect(() => {
+    (async () => {
+      try {
+        setIsLoading(true);
 
-				const { data } = await getLocalUser(nickname as string);
-				const user = data?.user;
+        const { data } = await getLocalUser(nickname as string);
+        const user = data?.user;
 
-				if (user) {
-					setUser(user);
-				}
+        if (user) {
+          setUser(user);
+        }
 
-				setIsLoading(false);
-			} catch (error) {
-				errorNotification(error as string);
-				setIsLoading(false);
-			}
-		})();
-	}, [nickname, getLocalUser]);
+        setIsLoading(false);
+      } catch (error) {
+        errorNotification(error as string);
+        setIsLoading(false);
+      }
+    })();
+  }, [nickname, getLocalUser]);
 
-	if (isLoading) {
-		return <Loading />;
-	}
+  if (isLoading) {
+    return <Loading />;
+  }
 
-	return (
-		<>
-			<SEO
-				title={`${user?.name} - Echo news app`}
-				description={`${user?.name} - Echo news app`}
-				canonical={`/${user?.nickname}`}
-			/>
+  return (
+    <>
+      <SEO
+        title={`${user?.name} - Echo news app`}
+        description={`${user?.name} - Echo news app`}
+        canonical={`/${user?.nickname}`}
+      />
 
-			<div>
-				{user && <UserInfo user={user} />}
+      <div>
+        {user && <UserInfo user={user} />}
 
-				<ArticlesList userNickname={nickname as string} title='User articles' />
-			</div>
-		</>
-	);
+        <ArticlesList userNickname={nickname as string} title='User articles' />
+      </div>
+    </>
+  );
 }

@@ -12,47 +12,47 @@ import { useCallback, useEffect } from 'react';
  */
 
 export const useUser = () => {
-	const { user, isLoading, error } = useAuth0User();
-	const isAdmin = (user as User)?.assigned_roles?.includes('admin') ?? false;
+  const { user, isLoading, error } = useAuth0User();
+  const isAdmin = (user as User)?.assigned_roles?.includes('admin') ?? false;
 
-	useEffect(() => {
-		if (!user) {
-			return;
-		}
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
 
-		const isUserInLocalStorage = localStorage.getItem(`user-${user.nickname}`);
+    const isUserInLocalStorage = localStorage.getItem(`user-${user.nickname}`);
 
-		if (isUserInLocalStorage) {
-			return;
-		}
+    if (isUserInLocalStorage) {
+      return;
+    }
 
-		localStorage.setItem(`user-${user.nickname}`, JSON.stringify(user));
-	}, [user]);
+    localStorage.setItem(`user-${user.nickname}`, JSON.stringify(user));
+  }, [user]);
 
-	/**
-	 * Get local user
-	 */
-	const getLocalUser = useCallback(async (nickname: string) => {
-		try {
-			await delayResponse();
+  /**
+   * Get local user
+   */
+  const getLocalUser = useCallback(async (nickname: string) => {
+    try {
+      await delayResponse();
 
-			const user = localStorage.getItem(`user-${nickname}`);
+      const user = localStorage.getItem(`user-${nickname}`);
 
-			return {
-				data: {
-					user: user ? (JSON.parse(user) as User) : null,
-				},
-			};
-		} catch (error) {
-			return { error: 'Failed to get user' };
-		}
-	}, []);
+      return {
+        data: {
+          user: user ? (JSON.parse(user) as User) : null,
+        },
+      };
+    } catch (error) {
+      return { error: 'Failed to get user' };
+    }
+  }, []);
 
-	return {
-		error,
-		getLocalUser,
-		isAdmin,
-		isLoading,
-		user,
-	};
+  return {
+    error,
+    getLocalUser,
+    isAdmin,
+    isLoading,
+    user,
+  };
 };

@@ -10,10 +10,10 @@ import styles from './loading.module.css';
  */
 
 export const Loading = ({ message }: { message?: string }) => {
-	return (
-		<div className={styles.container}>
-			<span>{message || 'Loading'}</span>
-			<Loader className={styles.spinner} size={24} />
-		</div>
-	);
+  return (
+    <div className={styles.container}>
+      <span>{message || 'Loading'}</span>
+      <Loader className={styles.spinner} size={24} />
+    </div>
+  );
 };

@@ -1,24 +1,24 @@
 .label {
-	align-items: center;
-	border-radius: var(--spacing-xl);
-	border: 1px solid #000;
-	cursor: pointer;
-	display: flex;
-	font-family: var(--font-geist-mono);
-	gap: var(--spacing-sm);
-	padding: var(--spacing-sm) var(--spacing-md);
-	position: relative;
-	transition: background-color var(--transition-default), color var(--transition-default);
+  align-items: center;
+  border-radius: var(--spacing-xl);
+  border: 1px solid #000;
+  cursor: pointer;
+  display: flex;
+  font-family: var(--font-geist-mono);
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  position: relative;
+  transition: background-color var(--transition-default), color var(--transition-default);
 }
 
 .label:hover,
 .label[data-checked="true"] {
-	background-color: #000;
-	color: #fff;
+  background-color: #000;
+  color: #fff;
 }
 
 .label input {
-	position: absolute;
-	visibility: hidden;
-	inset: 0;
+  position: absolute;
+  visibility: hidden;
+  inset: 0;
 }

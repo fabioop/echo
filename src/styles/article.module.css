@@ -1,32 +1,32 @@
 .container {
-	margin: 0 auto;
-	max-width: var(--container-max-width);
-	padding: 2rem var(--spacing-md);
+  margin: 0 auto;
+  max-width: var(--container-max-width);
+  padding: 2rem var(--spacing-md);
 }
 
 .title {
-	font-size: 1.875rem;
-	font-weight: 700;
-	margin-bottom: 2rem;
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
 }
 
 .content {
-	margin: var(--spacing-xl) auto;
-	max-width: 48rem;
+  margin: var(--spacing-xl) auto;
+  max-width: 48rem;
 }
 
 .body {
-	margin-top: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
 }
 
 .actions {
-	display: flex;
-	gap: var(--spacing-md);
-	margin-bottom: var(--spacing-xl);
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
 }
 
 .featuredImage {
-	aspect-ratio: 16 / 9;
-	position: relative;
-	width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  width: 100%;
 }

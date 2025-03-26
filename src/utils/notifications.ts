@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
  */
 
 export const errorNotification = (error: string) => {
-	toast.error(error);
+  toast.error(error);
 };
 
 /**
@@ -17,5 +17,5 @@ export const errorNotification = (error: string) => {
  */
 
 export const successNotification = (success: string) => {
-	toast.success(success);
+  toast.success(success);
 };

@@ -9,5 +9,5 @@ import type { UserProfile } from '@auth0/nextjs-auth0/client';
  */
 
 export type User = UserProfile & {
-	assigned_roles?: string[];
+  assigned_roles?: string[];
 };

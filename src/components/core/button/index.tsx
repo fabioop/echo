@@ -8,8 +8,8 @@ import styles from './button.module.css';
  */
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-	ariaLabel: string;
-	isAction?: boolean;
+  ariaLabel: string;
+  isAction?: boolean;
 };
 
 /**
@@ -17,9 +17,9 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
  */
 
 export const Button = ({ children, ariaLabel, className, isAction, ...props }: Props) => {
-	return (
-		<button aria-label={ariaLabel} data-is-action={isAction} className={`${styles.button} ${className}`} {...props}>
-			{children}
-		</button>
-	);
+  return (
+    <button aria-label={ariaLabel} data-is-action={isAction} className={`${styles.button} ${className}`} {...props}>
+      {children}
+    </button>
+  );
 };

@@ -15,10 +15,10 @@ import styles from '../cards.module.css';
  */
 
 type Props = {
-	article: Article;
-	isAdmin: boolean;
-	userNickname?: string;
-	handleDelete: (slug: string) => void;
+  article: Article;
+  isAdmin: boolean;
+  userNickname?: string;
+  handleDelete: (slug: string) => void;
 };
 
 /**
@@ -26,44 +26,44 @@ type Props = {
  */
 
 export const FeaturedCard = ({ article, isAdmin, userNickname, handleDelete }: Props) => {
-	const { title, smallDescription, authorNickname, slug, imageUrl, category } = article;
+  const { title, smallDescription, authorNickname, slug, imageUrl, category } = article;
 
-	const isAuthorized = userNickname === article.authorNickname && isAdmin;
+  const isAuthorized = userNickname === article.authorNickname && isAdmin;
 
-	return (
-		<div className={`${styles.card} ${styles.featuredCard}`}>
-			<div className={styles.image}>
-				<Image src={imageUrl} alt={title} />
-			</div>
+  return (
+    <div className={`${styles.card} ${styles.featuredCard}`}>
+      <div className={styles.image}>
+        <Image src={imageUrl} alt={title} />
+      </div>
 
-			<div className={styles.content}>
-				<div className={styles.header}>
-					<Header
-						title={title}
-						createdAt={article.createdAt}
-						authorNickname={article.authorNickname}
-						category={category}
-					/>
-				</div>
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <Header
+            title={title}
+            createdAt={article.createdAt}
+            authorNickname={article.authorNickname}
+            category={category}
+          />
+        </div>
 
-				<p>{smallDescription}</p>
+        <p>{smallDescription}</p>
 
-				<div className={styles.actions}>
-					<Link ariaLabel='Read more' href={`/${authorNickname}/${slug}`} isButton label='Read more' />
+        <div className={styles.actions}>
+          <Link ariaLabel='Read more' href={`/${authorNickname}/${slug}`} isButton label='Read more' />
 
-					{isAuthorized && (
-						<>
-							<Link ariaLabel={`Edit article: ${title}`} href={`/article/edit/${slug}`} isButton isAction>
-								<Pencil size={16} />
-							</Link>
+          {isAuthorized && (
+            <>
+              <Link ariaLabel={`Edit article: ${title}`} href={`/article/edit/${slug}`} isButton isAction>
+                <Pencil size={16} />
+              </Link>
 
-							<Button ariaLabel={`Delete article ${title}`} type='button' onClick={() => handleDelete(slug)} isAction>
-								<Trash size={16} />
-							</Button>
-						</>
-					)}
-				</div>
-			</div>
-		</div>
-	);
+              <Button ariaLabel={`Delete article ${title}`} type='button' onClick={() => handleDelete(slug)} isAction>
+                <Trash size={16} />
+              </Button>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };

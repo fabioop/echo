@@ -10,13 +10,13 @@ import NextLink from 'next/link';
  */
 
 type Props = {
-	ariaLabel: string;
-	children?: React.ReactNode;
-	className?: string;
-	href: string;
-	isButton?: boolean;
-	isAction?: boolean;
-	label?: string;
+  ariaLabel: string;
+  children?: React.ReactNode;
+  className?: string;
+  href: string;
+  isButton?: boolean;
+  isAction?: boolean;
+  label?: string;
 };
 
 /**
@@ -24,15 +24,15 @@ type Props = {
  */
 
 export const Link = ({ href, children, className, ariaLabel, isButton = false, isAction = false, label }: Props) => {
-	return (
-		<NextLink
-			aria-label={ariaLabel}
-			data-is-button={isButton}
-			data-is-action={isAction}
-			className={isButton ? `${styles.button} ${className}` : className}
-			href={href}
-		>
-			{label || children}
-		</NextLink>
-	);
+  return (
+    <NextLink
+      aria-label={ariaLabel}
+      data-is-button={isButton}
+      data-is-action={isAction}
+      className={isButton ? `${styles.button} ${className}` : className}
+      href={href}
+    >
+      {label || children}
+    </NextLink>
+  );
 };

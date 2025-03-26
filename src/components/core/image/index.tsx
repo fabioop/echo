@@ -9,9 +9,9 @@ import NextImage from 'next/image';
  */
 
 type Props = {
-	src?: string;
-	alt: string;
-	className?: string;
+  src?: string;
+  alt: string;
+  className?: string;
 };
 
 /**
@@ -19,13 +19,13 @@ type Props = {
  */
 
 export const Image = ({ src, alt, className }: Props) => {
-	return (
-		<NextImage
-			src={src ?? '/images/placeholder.svg'}
-			alt={alt}
-			fill
-			style={{ objectFit: 'cover', borderRadius: 'var(--border-radius)' }}
-			className={className}
-		/>
-	);
+  return (
+    <NextImage
+      src={src ?? '/images/placeholder.svg'}
+      alt={alt}
+      fill
+      style={{ objectFit: 'cover', borderRadius: 'var(--border-radius)' }}
+      className={className}
+    />
+  );
 };

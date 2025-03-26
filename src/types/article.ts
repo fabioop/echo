@@ -3,19 +3,19 @@
  */
 
 export type Article = {
-	authorNickname: string;
-	category: string;
-	content: string;
-	createdAt: string;
-	id: string;
-	imageUrl?: string;
-	isFeatured: boolean;
-	itemType: string;
-	slug: string;
-	smallDescription: string;
-	status: 'draft' | 'published';
-	title: string;
-	updatedAt: string;
+  authorNickname: string;
+  category: string;
+  content: string;
+  createdAt: string;
+  id: string;
+  imageUrl?: string;
+  isFeatured: boolean;
+  itemType: string;
+  slug: string;
+  smallDescription: string;
+  status: 'draft' | 'published';
+  title: string;
+  updatedAt: string;
 };
 
 /**
@@ -23,8 +23,8 @@ export type Article = {
  */
 
 export type ArticleResponse = {
-	success: boolean;
-	data: Article | null;
+  success: boolean;
+  data: Article | null;
 };
 
 /**
@@ -32,10 +32,10 @@ export type ArticleResponse = {
  */
 
 export type ArticlesResponse = {
-	success: boolean;
-	data: {
-		articles: Article[];
-		totalPages: number;
-		currentPage: number;
-	};
+  success: boolean;
+  data: {
+    articles: Article[];
+    totalPages: number;
+    currentPage: number;
+  };
 };

@@ -9,9 +9,9 @@ import styles from './checkbox.module.css';
  */
 
 type Props = {
-	label: string;
-	checked: boolean;
-	onChange: () => void;
+  label: string;
+  checked: boolean;
+  onChange: () => void;
 };
 
 /**
@@ -19,10 +19,10 @@ type Props = {
  */
 
 export const Checkbox = ({ label, checked, onChange }: Props) => {
-	return (
-		<label className={styles.label} aria-label={label} htmlFor={label} data-checked={checked}>
-			<input type='checkbox' checked={checked} onChange={onChange} id={label} />
-			{label}
-		</label>
-	);
+  return (
+    <label className={styles.label} aria-label={label} htmlFor={label} data-checked={checked}>
+      <input type='checkbox' checked={checked} onChange={onChange} id={label} />
+      {label}
+    </label>
+  );
 };

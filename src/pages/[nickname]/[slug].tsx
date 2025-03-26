@@ -25,7 +25,7 @@ import { useEffect, useState } from 'react';
  */
 
 type Props = {
-	article: Article | null;
+  article: Article | null;
 };
 
 /**
@@ -33,104 +33,104 @@ type Props = {
  */
 
 export default function ArticlePage() {
-	const router = useRouter();
-	const { nickname, slug } = router.query as { nickname: string; slug: string };
+  const router = useRouter();
+  const { nickname, slug } = router.query as { nickname: string; slug: string };
 
-	const { user: userAuth, getLocalUser } = useUser();
-	const { getArticle, deleteArticle } = useArticles();
-	const [article, setArticle] = useState<Article | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
-	const [user, setUser] = useState<User | null>(null);
-	const [isAuthorized, setIsAuthorized] = useState(false);
+  const { user: userAuth, getLocalUser } = useUser();
+  const { getArticle, deleteArticle } = useArticles();
+  const [article, setArticle] = useState<Article | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
-	useEffect(() => {
-		if (!slug) {
-			return;
-		}
+  useEffect(() => {
+    if (!slug) {
+      return;
+    }
 
-		(async () => {
-			try {
-				const { data } = await getArticle(slug);
-				const article = data?.article;
+    (async () => {
+      try {
+        const { data } = await getArticle(slug);
+        const article = data?.article;
 
-				if (article) {
-					setArticle(article);
-				}
+        if (article) {
+          setArticle(article);
+        }
 
-				const { data: userData } = await getLocalUser(nickname);
-				const user = userData?.user;
+        const { data: userData } = await getLocalUser(nickname);
+        const user = userData?.user;
 
-				if (user) {
-					setUser(user);
-				}
+        if (user) {
+          setUser(user);
+        }
 
-				setIsAuthorized(userAuth?.nickname === article?.authorNickname);
+        setIsAuthorized(userAuth?.nickname === article?.authorNickname);
 
-				setIsLoading(false);
-			} catch (error) {
-				errorNotification(error as string);
-				setIsLoading(false);
-			}
-		})();
-	}, [slug, getArticle, userAuth?.nickname, getLocalUser, nickname]);
+        setIsLoading(false);
+      } catch (error) {
+        errorNotification(error as string);
+        setIsLoading(false);
+      }
+    })();
+  }, [slug, getArticle, userAuth?.nickname, getLocalUser, nickname]);
 
-	const handleDelete = async () => {
-		try {
-			const { success } = await deleteArticle(slug);
+  const handleDelete = async () => {
+    try {
+      const { success } = await deleteArticle(slug);
 
-			if (success) {
-				router.push(`/${nickname}`);
-				successNotification('Article deleted successfully');
-			}
-		} catch (error) {
-			errorNotification(error as string);
-		}
-	};
+      if (success) {
+        router.push(`/${nickname}`);
+        successNotification('Article deleted successfully');
+      }
+    } catch (error) {
+      errorNotification(error as string);
+    }
+  };
 
-	if (isLoading) {
-		return <Loading />;
-	}
+  if (isLoading) {
+    return <Loading />;
+  }
 
-	if (!article) {
-		return <ErrorMessage message='Article not found' />;
-	}
+  if (!article) {
+    return <ErrorMessage message='Article not found' />;
+  }
 
-	return (
-		<>
-			<SEO title={article.title} description={article.smallDescription} canonical={`/${nickname}/${slug}`} />
+  return (
+    <>
+      <SEO title={article.title} description={article.smallDescription} canonical={`/${nickname}/${slug}`} />
 
-			<div>
-				<div className={styles.featuredImage}>
-					<Image src={article.imageUrl} alt={article.title} />
-				</div>
+      <div>
+        <div className={styles.featuredImage}>
+          <Image src={article.imageUrl} alt={article.title} />
+        </div>
 
-				<article className={styles.content}>
-					<div className={styles.actions}>
-						{isAuthorized && (
-							<>
-								<Link ariaLabel={`Edit article: ${article.title}`} href={`/article/edit/${slug}`} isButton isAction>
-									<Pencil size={16} />
-								</Link>
+        <article className={styles.content}>
+          <div className={styles.actions}>
+            {isAuthorized && (
+              <>
+                <Link ariaLabel={`Edit article: ${article.title}`} href={`/article/edit/${slug}`} isButton isAction>
+                  <Pencil size={16} />
+                </Link>
 
-								<Button ariaLabel={`Delete article ${article.title}`} type='button' onClick={handleDelete} isAction>
-									<Trash size={16} />
-								</Button>
-							</>
-						)}
-					</div>
+                <Button ariaLabel={`Delete article ${article.title}`} type='button' onClick={handleDelete} isAction>
+                  <Trash size={16} />
+                </Button>
+              </>
+            )}
+          </div>
 
-					<div>
-						<Header
-							title={article.title}
-							createdAt={article.createdAt}
-							authorNickname={article.authorNickname}
-							category={article.category}
-						/>
+          <div>
+            <Header
+              title={article.title}
+              createdAt={article.createdAt}
+              authorNickname={article.authorNickname}
+              category={article.category}
+            />
 
-						<div className={styles.body}>{article.content}</div>
-					</div>
-				</article>
-			</div>
-		</>
-	);
+            <div className={styles.body}>{article.content}</div>
+          </div>
+        </article>
+      </div>
+    </>
+  );
 }

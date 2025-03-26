@@ -15,9 +15,9 @@ import styles from './articles-list.module.css';
  */
 
 type CategoriesListProps = {
-	categories: string[];
-	selectedCategories: string[] | null;
-	setSelectedCategories: (categories: string[] | null) => void;
+  categories: string[];
+  selectedCategories: string[] | null;
+  setSelectedCategories: (categories: string[] | null) => void;
 };
 
 /**
@@ -25,34 +25,34 @@ type CategoriesListProps = {
  */
 
 const CategoriesList = ({ categories, selectedCategories, setSelectedCategories }: CategoriesListProps) => {
-	const handleCategoryChange = (category: string) => {
-		if (selectedCategories) {
-			const newCategories = selectedCategories.includes(category)
-				? selectedCategories.filter((c) => c !== category)
-				: [...selectedCategories, category];
-			setSelectedCategories(newCategories.length > 0 ? newCategories : null);
-		} else {
-			setSelectedCategories([category]);
-		}
-	};
+  const handleCategoryChange = (category: string) => {
+    if (selectedCategories) {
+      const newCategories = selectedCategories.includes(category)
+        ? selectedCategories.filter((c) => c !== category)
+        : [...selectedCategories, category];
+      setSelectedCategories(newCategories.length > 0 ? newCategories : null);
+    } else {
+      setSelectedCategories([category]);
+    }
+  };
 
-	return (
-		<ul className={styles.filters}>
-			<li>
-				<Checkbox label='All' checked={selectedCategories === null} onChange={() => setSelectedCategories(null)} />
-			</li>
+  return (
+    <ul className={styles.filters}>
+      <li>
+        <Checkbox label='All' checked={selectedCategories === null} onChange={() => setSelectedCategories(null)} />
+      </li>
 
-			{categories.map((category) => (
-				<li key={category}>
-					<Checkbox
-						label={category}
-						checked={selectedCategories?.includes(category) ?? false}
-						onChange={() => handleCategoryChange(category)}
-					/>
-				</li>
-			))}
-		</ul>
-	);
+      {categories.map((category) => (
+        <li key={category}>
+          <Checkbox
+            label={category}
+            checked={selectedCategories?.includes(category) ?? false}
+            onChange={() => handleCategoryChange(category)}
+          />
+        </li>
+      ))}
+    </ul>
+  );
 };
 
 /**
@@ -60,8 +60,8 @@ const CategoriesList = ({ categories, selectedCategories, setSelectedCategories 
  */
 
 type Props = {
-	userNickname?: string;
-	title: string;
+  userNickname?: string;
+  title: string;
 };
 
 /**
@@ -69,62 +69,62 @@ type Props = {
  */
 
 export const ArticlesList = ({ userNickname, title }: Props) => {
-	const {
-		articles,
-		categories,
-		isLoading,
-		pagination,
-		selectedCategories,
-		setSelectedCategories,
-		handleDelete,
-		handleLoadMore,
-		user,
-		isAdmin,
-	} = useArticlesList(userNickname);
+  const {
+    articles,
+    categories,
+    isLoading,
+    pagination,
+    selectedCategories,
+    setSelectedCategories,
+    handleDelete,
+    handleLoadMore,
+    user,
+    isAdmin,
+  } = useArticlesList(userNickname);
 
-	return (
-		<section>
-			<h2>{title}</h2>
+  return (
+    <section>
+      <h2>{title}</h2>
 
-			<div className={styles.container}>
-				<CategoriesList
-					categories={categories}
-					selectedCategories={selectedCategories}
-					setSelectedCategories={setSelectedCategories}
-				/>
+      <div className={styles.container}>
+        <CategoriesList
+          categories={categories}
+          selectedCategories={selectedCategories}
+          setSelectedCategories={setSelectedCategories}
+        />
 
-				{isLoading && <Loading />}
+        {isLoading && <Loading />}
 
-				{!isLoading && articles.length > 0 && (
-					<>
-						<div className={styles.grid}>
-							{articles.map((article) => (
-								<Card
-									key={article.id}
-									article={article}
-									isAuthorized={user?.nickname === article.authorNickname && isAdmin}
-									handleDelete={handleDelete}
-								/>
-							))}
-						</div>
+        {!isLoading && articles.length > 0 && (
+          <>
+            <div className={styles.grid}>
+              {articles.map((article) => (
+                <Card
+                  key={article.id}
+                  article={article}
+                  isAuthorized={user?.nickname === article.authorNickname && isAdmin}
+                  handleDelete={handleDelete}
+                />
+              ))}
+            </div>
 
-						{pagination.currentPage < pagination.totalPages && articles.length > 0 && (
-							<Button
-								className={styles.loadMore}
-								ariaLabel='Load more articles'
-								type='button'
-								onClick={() => handleLoadMore()}
-							>
-								Load more
-							</Button>
-						)}
-					</>
-				)}
+            {pagination.currentPage < pagination.totalPages && articles.length > 0 && (
+              <Button
+                className={styles.loadMore}
+                ariaLabel='Load more articles'
+                type='button'
+                onClick={() => handleLoadMore()}
+              >
+                Load more
+              </Button>
+            )}
+          </>
+        )}
 
-				{!isLoading && articles.length === 0 && (
-					<ErrorMessage message={`No articles found. ${isAdmin ? 'Create one!' : ''}`} />
-				)}
-			</div>
-		</section>
-	);
+        {!isLoading && articles.length === 0 && (
+          <ErrorMessage message={`No articles found. ${isAdmin ? 'Create one!' : ''}`} />
+        )}
+      </div>
+    </section>
+  );
 };

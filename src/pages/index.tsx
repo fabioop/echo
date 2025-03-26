@@ -11,13 +11,13 @@ import { FeaturedArticles } from '@/components/sections/featured-articles';
  */
 
 export default function Home() {
-	return (
-		<>
-			<SEO title='Home' description='Echo news app. Your voice, amplified.' canonical='/' />
+  return (
+    <>
+      <SEO title='Home' description='Echo news app. Your voice, amplified.' canonical='/' />
 
-			<FeaturedArticles />
+      <FeaturedArticles />
 
-			<ArticlesList title='Explore news articles' />
-		</>
-	);
+      <ArticlesList title='Explore news articles' />
+    </>
+  );
 }

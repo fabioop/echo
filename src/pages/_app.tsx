@@ -13,12 +13,12 @@ import { ToastContainer } from 'react-toastify';
  */
 
 export default function App({ Component, pageProps }: AppProps) {
-	return (
-		<UserProvider>
-			<Layout>
-				<ToastContainer />
-				<Component {...pageProps} />
-			</Layout>
-		</UserProvider>
-	);
+  return (
+    <UserProvider>
+      <Layout>
+        <ToastContainer />
+        <Component {...pageProps} />
+      </Layout>
+    </UserProvider>
+  );
 }

@@ -15,7 +15,7 @@ import type { ReactNode } from 'react';
  */
 
 type Props = {
-	children: ReactNode;
+  children: ReactNode;
 };
 
 /**
@@ -23,13 +23,13 @@ type Props = {
  */
 
 const geistSans = Geist({
-	variable: '--font-geist-sans',
-	subsets: ['latin'],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-	variable: '--font-geist-mono',
-	subsets: ['latin'],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 /**
@@ -37,29 +37,29 @@ const geistMono = Geist_Mono({
  */
 
 export const Layout = ({ children }: Props) => {
-	const { user, isLoading, error } = useUser();
+  const { user, isLoading, error } = useUser();
 
-	return (
-		<div className={`${geistSans.variable} ${geistMono.variable} font-sans`}>
-			<Navbar />
+  return (
+    <div className={`${geistSans.variable} ${geistMono.variable} font-sans`}>
+      <Navbar />
 
-			<main className='container layout'>
-				{isLoading && <Loading message='Loading user...' />}
+      <main className='container layout'>
+        {isLoading && <Loading message='Loading user...' />}
 
-				{error && <div>{error.message}</div>}
+        {error && <div>{error.message}</div>}
 
-				{!isLoading && !user && (
-					<div className='hero'>
-						<h1>Your voice, amplified.</h1>
-						<br />
-						<Link ariaLabel='Login' href='/api/auth/login' label='Get started' isButton />
-					</div>
-				)}
+        {!isLoading && !user && (
+          <div className='hero'>
+            <h1>Your voice, amplified.</h1>
+            <br />
+            <Link ariaLabel='Login' href='/api/auth/login' label='Get started' isButton />
+          </div>
+        )}
 
-				{!isLoading && user && children}
-			</main>
+        {!isLoading && user && children}
+      </main>
 
-			<Footer />
-		</div>
-	);
+      <Footer />
+    </div>
+  );
 };

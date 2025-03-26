@@ -20,67 +20,67 @@ import { useEffect, useState } from 'react';
  */
 
 export default function EditArticle() {
-	const router = useRouter();
-	const { slug } = router.query as { slug: string };
+  const router = useRouter();
+  const { slug } = router.query as { slug: string };
 
-	const { user } = useUser();
+  const { user } = useUser();
 
-	const { getArticle } = useArticles();
+  const { getArticle } = useArticles();
 
-	const [article, setArticle] = useState<Article | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState('');
-	const [isAuthorized, setIsAuthorized] = useState(false);
+  const [article, setArticle] = useState<Article | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
-	useEffect(() => {
-		if (!slug) {
-			return;
-		}
+  useEffect(() => {
+    if (!slug) {
+      return;
+    }
 
-		(async () => {
-			setIsLoading(true);
+    (async () => {
+      setIsLoading(true);
 
-			try {
-				const { data } = await getArticle(slug);
-				const article = data?.article;
+      try {
+        const { data } = await getArticle(slug);
+        const article = data?.article;
 
-				if (article) {
-					setArticle(article);
-					setIsAuthorized(user?.nickname === article.authorNickname);
-				}
+        if (article) {
+          setArticle(article);
+          setIsAuthorized(user?.nickname === article.authorNickname);
+        }
 
-				setIsLoading(false);
-			} catch (error) {
-				setError(error as string);
-				errorNotification(error as string);
-				setIsLoading(false);
-			}
-		})();
-	}, [slug, getArticle, user?.nickname]);
+        setIsLoading(false);
+      } catch (error) {
+        setError(error as string);
+        errorNotification(error as string);
+        setIsLoading(false);
+      }
+    })();
+  }, [slug, getArticle, user?.nickname]);
 
-	return (
-		<>
-			<SEO title='Edit Article' description='Edit your article' canonical={`/article/edit/${slug}`} />
+  return (
+    <>
+      <SEO title='Edit Article' description='Edit your article' canonical={`/article/edit/${slug}`} />
 
-			<div className={styles.container}>
-				<h1 className={styles.title}>Edit Article</h1>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Edit Article</h1>
 
-				{isLoading && <Loading message='Loading article...' />}
+        {isLoading && <Loading message='Loading article...' />}
 
-				{!isLoading && !isAuthorized && (
-					<>
-						<ErrorMessage message='You are not authorized to edit this article' />
+        {!isLoading && !isAuthorized && (
+          <>
+            <ErrorMessage message='You are not authorized to edit this article' />
 
-						<Link ariaLabel='Go back to home' href='/' label='Go back to home' />
-					</>
-				)}
+            <Link ariaLabel='Go back to home' href='/' label='Go back to home' />
+          </>
+        )}
 
-				{error && <ErrorMessage message={error} />}
+        {error && <ErrorMessage message={error} />}
 
-				{article && isAuthorized && !isLoading && <ArticleForm article={article} isEdit />}
+        {article && isAuthorized && !isLoading && <ArticleForm article={article} isEdit />}
 
-				{!error && !article && !isLoading && <ErrorMessage message='No article found' />}
-			</div>
-		</>
-	);
+        {!error && !article && !isLoading && <ErrorMessage message='No article found' />}
+      </div>
+    </>
+  );
 }

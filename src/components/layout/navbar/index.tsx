@@ -12,40 +12,40 @@ import styles from './navbar.module.css';
  */
 
 export const Navbar = () => {
-	const { user, isLoading, isAdmin } = useUser();
+  const { user, isLoading, isAdmin } = useUser();
 
-	return (
-		<header className={styles.navbar}>
-			<nav className={styles.navigation}>
-				<Link ariaLabel='Home' href='/'>
-					<span className={styles.logo}>Echo News</span>
-				</Link>
+  return (
+    <header className={styles.navbar}>
+      <nav className={styles.navigation}>
+        <Link ariaLabel='Home' href='/'>
+          <span className={styles.logo}>Echo News</span>
+        </Link>
 
-				<div className={styles.actions}>
-					{isAdmin && <Link ariaLabel='New Article' href='/article/new' label='New Article' />}
+        <div className={styles.actions}>
+          {isAdmin && <Link ariaLabel='New Article' href='/article/new' label='New Article' />}
 
-					{!user && !isLoading && <Link ariaLabel='Login' href='/api/auth/login' label='Login' />}
+          {!user && !isLoading && <Link ariaLabel='Login' href='/api/auth/login' label='Login' />}
 
-					{user && !isLoading && (
-						<div className={styles.userInfo}>
-							<Link
-								ariaLabel='My profile'
-								className={styles.userInfo}
-								href={`/${user.nickname}`}
-								label={user.name || 'User'}
-							/>
+          {user && !isLoading && (
+            <div className={styles.userInfo}>
+              <Link
+                ariaLabel='My profile'
+                className={styles.userInfo}
+                href={`/${user.nickname}`}
+                label={user.name || 'User'}
+              />
 
-							{user.picture && (
-								<div className={styles.userPicture}>
-									<Image src={user.picture} alt={user.name || 'User name'} />
-								</div>
-							)}
-						</div>
-					)}
+              {user.picture && (
+                <div className={styles.userPicture}>
+                  <Image src={user.picture} alt={user.name || 'User name'} />
+                </div>
+              )}
+            </div>
+          )}
 
-					{user && !isLoading && <Link ariaLabel='Logout' href='/api/auth/logout' label='Logout' />}
-				</div>
-			</nav>
-		</header>
-	);
+          {user && !isLoading && <Link ariaLabel='Logout' href='/api/auth/logout' label='Logout' />}
+        </div>
+      </nav>
+    </header>
+  );
 };
