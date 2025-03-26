@@ -49,9 +49,6 @@ const convertImageToBase64 = (file: File): Promise<string> => {
  *  Export `ArticleForm` component
  */
 
-// TODO: bug when uploading image?
-// TODO: convert inputs to component
-
 export const ArticleForm = ({ article, isEdit = false }: Props) => {
 	const { user } = useUser();
 	const { createArticle, updateArticle, getCategories } = useArticles();
@@ -137,7 +134,7 @@ export const ArticleForm = ({ article, isEdit = false }: Props) => {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-			<div className={styles.formGroup}>
+			<div className={styles.inputWrapper}>
 				<label htmlFor='title' className={styles.label}>
 					Title
 				</label>
@@ -153,7 +150,7 @@ export const ArticleForm = ({ article, isEdit = false }: Props) => {
 				{errors.title && <p className={styles.error}>{errors.title.message}</p>}
 			</div>
 
-			<div className={styles.formGroup}>
+			<div className={styles.inputWrapper}>
 				<label htmlFor='smallDescription' className={styles.label}>
 					Small Description
 				</label>
@@ -169,7 +166,7 @@ export const ArticleForm = ({ article, isEdit = false }: Props) => {
 				{errors.smallDescription && <p className={styles.error}>{errors.smallDescription.message}</p>}
 			</div>
 
-			<div className={styles.formGroup}>
+			<div className={`${styles.inputWrapper} ${styles.widthAuto}`}>
 				<label htmlFor='image' className={styles.label}>
 					Image
 				</label>
@@ -181,7 +178,7 @@ export const ArticleForm = ({ article, isEdit = false }: Props) => {
 				)}
 			</div>
 
-			<div className={styles.formGroup}>
+			<div className={`${styles.inputWrapper} ${styles.widthAuto}`}>
 				<label htmlFor='category' className={styles.label}>
 					Category
 				</label>
@@ -202,7 +199,7 @@ export const ArticleForm = ({ article, isEdit = false }: Props) => {
 				{errors.category && <p className={styles.error}>{errors.category.message}</p>}
 			</div>
 
-			<div className={styles.formGroup}>
+			<div className={styles.inputWrapper}>
 				<label htmlFor='content' className={styles.label}>
 					Content
 				</label>
@@ -216,30 +213,32 @@ export const ArticleForm = ({ article, isEdit = false }: Props) => {
 				{errors.content && <p className={styles.error}>{errors.content.message}</p>}
 			</div>
 
-			<div className={styles.formGroup}>
-				<label htmlFor='status' className={styles.label}>
-					Status
-				</label>
-				<select
-					{...register('status', {
-						required: 'Please select a status',
-					})}
-					className={styles.select}
-				>
-					<option value='draft'>Draft</option>
-					<option value='published'>Published</option>
-				</select>
-			</div>
+			<div className={styles.inputsWrapper}>
+				<div className={styles.inputWrapper}>
+					<label htmlFor='status' className={styles.label}>
+						Status
+					</label>
+					<select
+						{...register('status', {
+							required: 'Please select a status',
+						})}
+						className={styles.select}
+					>
+						<option value='draft'>Draft</option>
+						<option value='published'>Published</option>
+					</select>
+				</div>
 
-			<div className={styles.formGroup}>
-				<label htmlFor='isFeatured' className={styles.label}>
-					Is Featured
-				</label>
-				<input type='checkbox' {...register('isFeatured')} className={styles.checkbox} />
+				<div className={styles.inputWrapper}>
+					<label htmlFor='isFeatured' className={styles.label}>
+						Is Featured
+					</label>
+					<input type='checkbox' {...register('isFeatured')} className={styles.checkbox} />
+				</div>
 			</div>
 
 			<div className={styles.actions}>
-				<Link ariaLabel='Cancel' className={styles.cancelButton} href='/' label='Cancel' />
+				<Link ariaLabel='Cancel' className={styles.cancelButton} href='/' label='Cancel' isButton />
 
 				<Button
 					ariaLabel={

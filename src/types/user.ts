@@ -2,7 +2,7 @@
  * Modules dependecies.
  */
 
-import type { UserContext, UserProfile } from '@auth0/nextjs-auth0/client';
+import type { UserProfile } from '@auth0/nextjs-auth0/client';
 
 /**
  * User type.
@@ -11,5 +11,3 @@ import type { UserContext, UserProfile } from '@auth0/nextjs-auth0/client';
 export type User = UserProfile & {
 	assigned_roles?: string[];
 };
-
-// TODO: Add user type to auth0 user type

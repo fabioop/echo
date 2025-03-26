@@ -27,3 +27,8 @@
 .filters li {
 	list-style: none;
 }
+
+.loadMore {
+	width: fit-content;
+	margin: var(--spacing-2xl) auto 0;
+}

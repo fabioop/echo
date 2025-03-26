@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
  * Constants
  */
 const ARTICLE_STORAGE_KEY = 'article';
-const ARTICLES_PER_PAGE = 8;
+const ARTICLES_PER_PAGE = 4;
 
 /**
  * Export `useArticle` hook.

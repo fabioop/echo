@@ -96,22 +96,29 @@ export const ArticlesList = ({ userNickname, title }: Props) => {
 				{isLoading && <Loading />}
 
 				{!isLoading && articles.length > 0 && (
-					<div className={styles.grid}>
-						{articles.map((article) => (
-							<Card
-								key={article.id}
-								article={article}
-								isAuthorized={user?.nickname === article.authorNickname && isAdmin}
-								handleDelete={handleDelete}
-							/>
-						))}
+					<>
+						<div className={styles.grid}>
+							{articles.map((article) => (
+								<Card
+									key={article.id}
+									article={article}
+									isAuthorized={user?.nickname === article.authorNickname && isAdmin}
+									handleDelete={handleDelete}
+								/>
+							))}
+						</div>
 
 						{pagination.currentPage < pagination.totalPages && articles.length > 0 && (
-							<Button ariaLabel='Load more articles' type='button' onClick={() => handleLoadMore()}>
+							<Button
+								className={styles.loadMore}
+								ariaLabel='Load more articles'
+								type='button'
+								onClick={() => handleLoadMore()}
+							>
 								Load more
 							</Button>
 						)}
-					</div>
+					</>
 				)}
 
 				{!isLoading && articles.length === 0 && (

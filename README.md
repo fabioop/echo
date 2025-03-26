@@ -12,7 +12,7 @@ Your voice, amplified.
 ### Requirments
 
 - Node.js >= 20
-- Yarn or npm
+- Yarn >= 1.22.19
 
 ### Install dependencies
 

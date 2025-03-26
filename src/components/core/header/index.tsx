@@ -25,7 +25,7 @@ type Props = {
 
 export const Header = ({ title, createdAt, authorNickname, category, isCard = false, isFeatured = true }: Props) => (
 	<div className={styles.header}>
-		{isCard ? isFeatured ? <h1>{title}</h1> : <h2>{title}</h2> : <h1>{title}</h1>}
+		{isFeatured && !isCard ? <h1>{title}</h1> : <h3>{title}</h3>}
 
 		<div className={styles.meta}>
 			<time dateTime={createdAt}>{formatDate(createdAt)}</time>
