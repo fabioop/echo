@@ -2,12 +2,19 @@
  * Modules dependencies.
  */
 
+import { Button } from '@/components/core/button';
+import { ErrorMessage } from '@/components/core/error';
+import { Image } from '@/components/core/image';
+import { Link } from '@/components/core/link';
+import { Loading } from '@/components/core/loading';
+import { SEO } from '@/components/core/seo';
 import { useArticles } from '@/hooks/use-articles';
 import { useUser } from '@/hooks/use-user';
+import styles from '@/styles/article.module.css';
 import type { Article } from '@/types/article';
 import type { User } from '@/types/user';
 import { errorNotification, successNotification } from '@/utils/notifications';
-import Link from 'next/link';
+import { Pencil, Trash } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -79,30 +86,44 @@ export default function ArticlePage() {
 	};
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <Loading />;
 	}
 
 	if (!article) {
-		return <div>Article not found</div>;
+		return <ErrorMessage message='Article not found' />;
 	}
 
 	return (
-		<div>
-			<h1>{article.title}</h1>
-			<div>{article.content}</div>
-			<Link href={`/${article.authorNickname}`}>{article.authorNickname}</Link>
+		<>
+			<SEO title={article.title} description={article.content} canonical={`/${nickname}/${slug}`} />
 
-			{isAuthorized && (
-				<Link href={`/article/edit/${slug}`}>
-					<button type='button'>Edit</button>
-				</Link>
-			)}
+			<div>
+				<div className={styles.featuredImage}>
+					<Image src={article.imageUrl} alt={article.title} />
+				</div>
 
-			{isAuthorized && (
-				<button type='button' onClick={handleDelete}>
-					Delete
-				</button>
-			)}
-		</div>
+				<div className={styles.actions}>
+					{isAuthorized && (
+						<>
+							<Link ariaLabel={`Edit article: ${article.title}`} href={`/article/edit/${slug}`} isButton isAction>
+								<Pencil size={16} />
+							</Link>
+
+							<Button ariaLabel={`Delete article ${article.title}`} type='button' onClick={handleDelete} isAction>
+								<Trash size={16} />
+							</Button>
+						</>
+					)}
+				</div>
+
+				<article className={styles.content}>
+					<h1>{article.title}</h1>
+					<div>{article.content}</div>
+					<Link ariaLabel={`View ${article.authorNickname}'s profile`} href={`/${article.authorNickname}`}>
+						{article.authorNickname}
+					</Link>
+				</article>
+			</div>
+		</>
 	);
 }

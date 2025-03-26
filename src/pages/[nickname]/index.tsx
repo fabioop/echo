@@ -1,8 +1,11 @@
 /**
- * Export `UserProfile` page component.
+ * Modules dependencies.
  */
 
+import { Loading } from '@/components/core/loading';
+import { SEO } from '@/components/core/seo';
 import { ArticlesList } from '@/components/sections/articles-list';
+import { UserInfo } from '@/components/sections/user-info';
 import { useUser } from '@/hooks/use-user';
 import type { User } from '@/types/user';
 import { errorNotification } from '@/utils/notifications';
@@ -43,20 +46,22 @@ export default function UserProfile() {
 	}, [nickname, getLocalUser]);
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <Loading />;
 	}
 
 	return (
-		<div>
-			<h1>User Profile</h1>
+		<>
+			<SEO
+				title={`${user?.name} - Echo news app`}
+				description={`${user?.name} - Echo news app`}
+				canonical={`/${user?.nickname}`}
+			/>
 
-			<p>{user?.nickname}</p>
+			<div>
+				{user && <UserInfo user={user} />}
 
-			<p>{user?.email}</p>
-
-			{user?.picture && user?.nickname && <img src={user.picture} alt={user.nickname} />}
-
-			<ArticlesList userNickname={nickname as string} />
-		</div>
+				<ArticlesList userNickname={nickname as string} title='User articles' />
+			</div>
+		</>
 	);
 }

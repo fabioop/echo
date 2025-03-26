@@ -1,0 +1,17 @@
+.container {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-sm);
+	width: fit-content;
+	margin: var(--spacing-xl) auto;
+	padding: var(--spacing-md);
+	border-radius: var(--spacing-sm);
+	background-color: var(--color-error-secondary);
+	color: var(--color-error);
+}
+
+.message {
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	margin: 0;
+}

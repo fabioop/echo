@@ -12,7 +12,7 @@ export type Article = {
 	isFeatured: boolean;
 	itemType: string;
 	slug: string;
-	smallDescription?: string;
+	smallDescription: string;
 	status: 'draft' | 'published';
 	title: string;
 	updatedAt: string;

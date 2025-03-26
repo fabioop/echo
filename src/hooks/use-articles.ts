@@ -5,6 +5,7 @@
 import type { Article } from '@/types/article';
 import { delayResponse } from '@/utils/requests';
 import { useCallback } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * Constants
@@ -43,6 +44,7 @@ export const useArticles = () => {
 				`${ARTICLE_STORAGE_KEY}-${article.slug}`,
 				JSON.stringify({
 					...article,
+					id: uuidv4(),
 					createdAt: new Date().toISOString(),
 					itemType: ARTICLE_STORAGE_KEY,
 				}),

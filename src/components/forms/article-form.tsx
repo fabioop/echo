@@ -2,14 +2,15 @@
  * Modules dependencies.
  */
 
+import { Button } from '@/components/core/button';
+import { Link } from '@/components/core/link';
 import { useArticles } from '@/hooks/use-articles';
 import { useUser } from '@/hooks/use-user';
-import styles from '@/styles/ArticleForm.module.css';
 import type { Article } from '@/types/article';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import styles from './article-form.module.css';
 
 /*
  * `Props` type.
@@ -152,24 +153,10 @@ export const ArticleForm = ({ article, isEdit = false }: Props) => {
 				{errors.title && <p className={styles.error}>{errors.title.message}</p>}
 			</div>
 
-			{/* <div className={styles.formGroup}>
-        <label htmlFor="slug" className={styles.label}>
-          Slug
-        </label>
-        <input
-          type="text"
-          placeholder="Slug"
-          {...register('slug', {
-            required: 'Slug is required',
-            minLength: { value: 3, message: 'Slug must be at least 3 characters long' },
-          })}
-          className={styles.input}
-        />
-        {errors.slug && <p className={styles.error}>{errors.slug.message}</p>}
-      </div> */}
-
 			<div className={styles.formGroup}>
-				<label htmlFor='smallDescription'>Small Description</label>
+				<label htmlFor='smallDescription' className={styles.label}>
+					Small Description
+				</label>
 				<input
 					type='text'
 					placeholder='Small Description'
@@ -252,13 +239,23 @@ export const ArticleForm = ({ article, isEdit = false }: Props) => {
 			</div>
 
 			<div className={styles.actions}>
-				<Link className={styles.cancelButton} href='/'>
-					Cancel
-				</Link>
+				<Link ariaLabel='Cancel' className={styles.cancelButton} href='/' label='Cancel' />
 
-				<button type='submit' className={styles.submitButton} disabled={isSubmitting}>
+				<Button
+					ariaLabel={
+						isSubmitting
+							? isEdit
+								? 'Updating article...'
+								: 'Creating article...'
+							: isEdit
+								? 'Update article'
+								: 'Create article'
+					}
+					type='submit'
+					disabled={isSubmitting}
+				>
 					{isSubmitting ? (isEdit ? 'Updating...' : 'Creating...') : isEdit ? 'Update' : 'Create'} Article
-				</button>
+				</Button>
 			</div>
 		</form>
 	);

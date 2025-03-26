@@ -2,7 +2,7 @@
  * Modules dependencies.
  */
 
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 /**
  * Next.js configuration.
@@ -10,6 +10,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
 	/* config options here */
+	images: {
+		remotePatterns: [
+			{
+				hostname: '**',
+			},
+		],
+	},
 	reactStrictMode: true,
 };
 

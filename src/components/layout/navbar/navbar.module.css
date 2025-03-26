@@ -1,0 +1,42 @@
+.navbar {
+	width: 100%;
+	height: var(--navbar-height);
+	padding: var(--spacing-md) 0;
+	background-color: #fff;
+	border-bottom: 1px solid var(--color-secondary);
+}
+
+.logo {
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+.navigation {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	max-width: var(--container-max-width);
+	padding: 0 var(--spacing-md);
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-md);
+}
+
+.userInfo {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-md);
+}
+
+.userPicture {
+	border-radius: 50%;
+	height: 32px;
+	object-fit: cover;
+	overflow: hidden;
+	position: relative;
+	width: 32px;
+}

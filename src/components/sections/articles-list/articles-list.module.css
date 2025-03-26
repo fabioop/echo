@@ -1,30 +1,26 @@
 .container {
+	margin: var(--spacing-xl) 0;
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
+	gap: var(--spacing-lg);
 }
 
 .grid {
 	display: grid;
-	gap: 1.5rem;
+	grid-template-columns: 1fr;
+	gap: var(--spacing-lg);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
 	.grid {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
-@media (min-width: 1024px) {
-	.grid {
-		grid-template-columns: repeat(3, 1fr);
-	}
-}
-
 .article {
 	border: 1px solid #e5e7eb;
-	border-radius: 0.5rem;
-	padding: 1rem;
+	border-radius: var(--spacing-sm);
+	padding: var(--spacing-md);
 	transition: border-color 0.2s;
 }
 
@@ -35,12 +31,7 @@
 .title {
 	font-size: 1.125rem;
 	font-weight: 600;
-	margin-bottom: 0.5rem;
-}
-
-.summary {
-	color: #4b5563;
-	margin-bottom: 1rem;
+	margin-bottom: var(--spacing-sm);
 }
 
 .meta {
@@ -48,16 +39,16 @@
 	align-items: center;
 	justify-content: space-between;
 	font-size: 0.875rem;
-	color: #6b7280;
+	color: var(--color-secondary);
 }
 
 .actions {
 	display: flex;
-	gap: 0.5rem;
+	gap: var(--spacing-sm);
 }
 
 .deleteButton {
-	color: #ef4444;
+	color: var(--color-error);
 	background: none;
 	border: none;
 	cursor: pointer;
@@ -65,7 +56,7 @@
 }
 
 .deleteButton:hover {
-	color: #b91c1c;
+	color: var(--color-error-secondary);
 }
 
 .link {
@@ -80,13 +71,13 @@
 .pagination {
 	display: flex;
 	justify-content: center;
-	gap: 0.5rem;
-	margin-top: 1.5rem;
+	gap: var(--spacing-sm);
+	margin-top: var(--spacing-lg);
 }
 
 .pageButton {
-	padding: 0.25rem 0.75rem;
-	border-radius: 0.25rem;
+	padding: var(--spacing-xs) var(--spacing-sm);
+	border-radius: var(--spacing-xs);
 	border: none;
 	cursor: pointer;
 	background-color: #e5e7eb;
@@ -99,4 +90,15 @@
 .activePageButton {
 	background-color: #3b82f6;
 	color: white;
+}
+
+.filters {
+	display: flex;
+	gap: var(--spacing-md);
+	margin-bottom: var(--spacing-md);
+	flex-wrap: wrap;
+}
+
+.filters li {
+	list-style: none;
 }

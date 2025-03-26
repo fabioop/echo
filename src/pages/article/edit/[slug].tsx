@@ -2,13 +2,16 @@
  * Modules dependencies.
  */
 
+import { ErrorMessage } from '@/components/core/error';
+import { Link } from '@/components/core/link';
+import { Loading } from '@/components/core/loading';
+import { SEO } from '@/components/core/seo';
 import { ArticleForm } from '@/components/forms/article-form';
 import { useArticles } from '@/hooks/use-articles';
 import { useUser } from '@/hooks/use-user';
-import styles from '@/styles/Article.module.css';
-import type { Article, ArticleResponse } from '@/types/article';
+import styles from '@/styles/article.module.css';
+import type { Article } from '@/types/article';
 import { errorNotification } from '@/utils/notifications';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -48,6 +51,7 @@ export default function EditArticle() {
 
 				setIsLoading(false);
 			} catch (error) {
+				setError(error as string);
 				errorNotification(error as string);
 				setIsLoading(false);
 			}
@@ -55,24 +59,28 @@ export default function EditArticle() {
 	}, [slug, getArticle, user?.nickname]);
 
 	return (
-		<div className={styles.container}>
-			<h1 className={styles.title}>Edit Article</h1>
+		<>
+			<SEO title='Edit Article' description='Edit your article' canonical={`/article/edit/${slug}`} />
 
-			{isLoading && <div className={styles.loading}>Loading article...</div>}
+			<div className={styles.container}>
+				<h1 className={styles.title}>Edit Article</h1>
 
-			{!isLoading && !isAuthorized && (
-				<>
-					<div className={styles.error}>You are not authorized to edit this article</div>
+				{isLoading && <Loading message='Loading article...' />}
 
-					<Link href='/'>Go back to home</Link>
-				</>
-			)}
+				{!isLoading && !isAuthorized && (
+					<>
+						<ErrorMessage message='You are not authorized to edit this article' />
 
-			{error && <div className={styles.error}>{error}</div>}
+						<Link ariaLabel='Go back to home' href='/' label='Go back to home' />
+					</>
+				)}
 
-			{article && isAuthorized && !isLoading && <ArticleForm article={article} isEdit />}
+				{error && <ErrorMessage message={error} />}
 
-			{!error && !article && !isLoading && <div className={styles.message}>No article found</div>}
-		</div>
+				{article && isAuthorized && !isLoading && <ArticleForm article={article} isEdit />}
+
+				{!error && !article && !isLoading && <ErrorMessage message='No article found' />}
+			</div>
+		</>
 	);
 }
