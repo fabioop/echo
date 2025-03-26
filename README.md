@@ -2,10 +2,7 @@
 
 Your voice, amplified.
 
-## Environments
-
-- [Production](https://echo-news-app.vercel.app)
-- [Development](https://echo-news-app-staging.vercel.app)
+- [Live demo](https://echo-news-app.vercel.app)
 
 ## Setup
 
