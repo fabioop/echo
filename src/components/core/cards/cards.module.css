@@ -5,11 +5,11 @@
 }
 
 .featuredCard:nth-child(2n) .image {
-	order: 1;
+	order: 2;
 }
 
 .featuredCard:nth-child(2n) .content {
-	order: 2;
+	order: 1;
 }
 
 .image {
