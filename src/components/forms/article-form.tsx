@@ -7,6 +7,7 @@ import { Link } from '@/components/core/link';
 import { useArticles } from '@/hooks/use-articles';
 import { useUser } from '@/hooks/use-user';
 import type { Article } from '@/types/article';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -50,9 +51,10 @@ const convertImageToBase64 = (file: File): Promise<string> => {
  */
 
 export const ArticleForm = ({ article, isEdit = false }: Props) => {
+  const router = useRouter();
+
   const { user } = useUser();
   const { createArticle, updateArticle, getCategories } = useArticles();
-
   const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -124,6 +126,8 @@ export const ArticleForm = ({ article, isEdit = false }: Props) => {
         } else {
           reset();
         }
+
+        router.push(`/${user?.nickname}/${articleData.slug}`);
       }
     } catch (error) {
       toast.error(`Failed to ${isEdit ? 'update' : 'create'} article`);

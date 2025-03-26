@@ -22,7 +22,7 @@ export const Navbar = () => {
         </Link>
 
         <div className={styles.actions}>
-          {isAdmin && <Link ariaLabel='New Article' href='/article/new' label='New Article' />}
+          {isAdmin && <Link ariaLabel='New Article' href='/article/new' label='New Article' isButton />}
 
           {!user && !isLoading && <Link ariaLabel='Login' href='/api/auth/login' label='Login' />}
 
